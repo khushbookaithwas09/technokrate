@@ -1,28 +1,5 @@
 @extends('main')
-
 @section('content')
-<style>
-    .form-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 40vh; /* Full height */
-    }
-    form {
-        border: 1px solid #ccc;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        background-color: #f9f9f9;
-    }
-    label {
-        display: inline-block;
-        width: 100px;
-    }
-    .center {
-        text-align: center; /* Center align content within the cell */
-    }
-</style>
 
 @if(Session::has('success'))
 <div class="alert alert-success">
@@ -49,9 +26,15 @@
             <td>{{ $row->name }}</td>
             <td>{{ $row->email }}</td>
             <td>{{ $row->phone_no }}</td>
-            <td class="center">
+            <td>
                 <a href="{{ route('employee.edit', ['id' => $row->id]) }}" class="btn btn-success">Edit</a>
-                <a href="{{ route('employee.delete', ['id' => $row->id]) }}" class="btn btn-danger">Delete</a>
+
+                <form id="delete-form-{{ $row->id }}" action="{{ route('employee.delete', ['id' => $row->id]) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete {{ $row->name }}?')">Delete</button>
+                </form>
+
                 <a href="{{ route('employee.view', ['id' => $row->id]) }}" class="btn btn-primary">View</a>
             </td>
         </tr>

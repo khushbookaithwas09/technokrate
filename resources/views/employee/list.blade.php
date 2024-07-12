@@ -16,7 +16,7 @@
         <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Phone No</th>
+            <th>Contact</th>
             <th>Action</th>
         </tr>
     </thead>
